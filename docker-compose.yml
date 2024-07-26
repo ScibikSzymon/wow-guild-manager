@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  postgres:
+    image: postgres:latest
+  guild.manager.api:
+    image: ${DOCKER_REGISTRY-}guildmanagerapi
+    build:
+      context: .
+      dockerfile: Guild.Manager.Api/Dockerfile
