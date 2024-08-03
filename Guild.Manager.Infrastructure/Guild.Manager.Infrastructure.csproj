@@ -3,17 +3,23 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.35" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
     <PackageReference Include="Npgsql" Version="8.0.3" />
     <PackageReference Include="Stashbox.Extensions.DependencyInjection" Version="5.5.4" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Guild.Manager.Domain\Guild.Manager.Domain.csproj" />
     <ProjectReference Include="..\Guild.Manager.Application\Guild.Manager.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

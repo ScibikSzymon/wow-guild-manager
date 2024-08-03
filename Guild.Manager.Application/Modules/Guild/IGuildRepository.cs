@@ -1,7 +1,8 @@
-﻿namespace Guild.Manager.Application.Modules.Guild;
+﻿using Guild.Manager.Domain.Entities;
 
+namespace Guild.Manager.Application.Modules.Guild;
 public interface IGuildRepository
 {
-    Task CreateGuild();
+    Task<GuildEntity> CreateGuildAsync(GuildEntity guild, CancellationToken cancellationToken = default);
     Task GetGuild(string guildname);
 }

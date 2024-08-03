@@ -4,10 +4,10 @@ namespace Guild.Manager.Api.Controllers
 {
     public class MembersController : BaseApiController
     {
-        [HttpPost()]
-        public ActionResult CreateMember()
-        {
-            return Ok();
-        }
+        //[HttpPost()]
+        //public ActionResult CreateMember()
+        //{
+        //    return Ok();
+        //}
     }
 }

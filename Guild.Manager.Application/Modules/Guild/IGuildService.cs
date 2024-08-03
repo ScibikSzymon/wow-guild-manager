@@ -1,7 +1,9 @@
-﻿namespace Guild.Manager.Application.Modules.Guild;
+﻿using Guild.Manager.Application.Common.Dtos;
 
-internal interface IGuildService
+namespace Guild.Manager.Application.Modules.Guild;
+
+public interface IGuildService
 {
-    Task CreateGuild();
+    Task<GuildDto> CreateGuildAsync(GuildDto guildDto, CancellationToken cancellationToken = default);
     Task GetGuild(string guildname);
 }

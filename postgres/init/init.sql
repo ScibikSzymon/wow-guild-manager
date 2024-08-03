@@ -1,25 +1,32 @@
 -- Create the Guild table
 CREATE TABLE Guild (
-    guild_id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    creation_date DATE NOT NULL
+    GuildId SERIAL PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    CreateDate DATE NOT NULL
 );
 
 -- Create the Member table
 CREATE TABLE Member (
-    member_id SERIAL PRIMARY KEY,
-    guild_id INT NOT NULL,
+    MemberId SERIAL PRIMARY KEY,
+    GuildId INT NOT NULL,
     name VARCHAR(100) NOT NULL,
-    join_date DATE NOT NULL,
-    role VARCHAR(50),
-    FOREIGN KEY (guild_id) REFERENCES Guild (guild_id) ON DELETE CASCADE
+    JoinDate DATE NOT NULL,
+    Role VARCHAR(50),
+    FOREIGN KEY (GuildId) REFERENCES Guild (GuildId) ON DELETE CASCADE
 );
 
 -- Create the Character table
 CREATE TABLE Character (
-    character_id SERIAL PRIMARY KEY,
-    member_id INT NOT NULL,
-    name VARCHAR(100) NOT NULL,
-    class VARCHAR(50),
-    FOREIGN KEY (member_id) REFERENCES Member (member_id) ON DELETE CASCADE
+    CharacterId SERIAL PRIMARY KEY,
+    MemberId INT NOT NULL,
+    Name VARCHAR(100) NOT NULL,
+    Class VARCHAR(50),
+    FOREIGN KEY (MemberId) REFERENCES Member (MemberId) ON DELETE CASCADE
+);
+
+CREATE TABLE RaidAttendance(
+    RaidAttendanceId SERIAL PRIMARY KEY,
+    MemberId INT NOT NULL,
+    CharacterId INT NOT NULL,
+    Status BOOLEAN DEFAULT NULL
 );

@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   postgres: 
-    ports:
+    ports: 
       - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -13,14 +13,14 @@ services:
       POSTGRES_DB: wow-manage-guild
       POSTGRES_HOST_AUTH_METHOD: trust
   pgadmin:
-    ports:
+    ports: 
       - "8888:80"
     volumes:
-      - pgadmin:/var/lib/pgadmin
+      - pgadmin:/var/lib/pgadmin 
     environment:
       PGADMIN_DEFAULT_EMAIL: user-name@domain-name.com
       PGADMIN_DEFAULT_PASSWORD: strong-password
-  guild.manager.api:
+  guild.manager.api: 
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_HTTP_PORTS: 8080
