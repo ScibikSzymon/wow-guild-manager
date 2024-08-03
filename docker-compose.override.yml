@@ -1,15 +1,16 @@
 version: '3.9'
 
 services:
-  postgres:
+  postgres: 
     ports:
       - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./postgres/init/:/docker-entrypoint-initdb.d/
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
-      POSTGRES_DB: postgres
+      POSTGRES_DB: wow-manage-guild
       POSTGRES_HOST_AUTH_METHOD: trust
   pgadmin:
     ports:

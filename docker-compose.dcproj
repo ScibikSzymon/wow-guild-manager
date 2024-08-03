@@ -15,5 +15,6 @@
     </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
+    <None Include="postgres\init\init.sql" />
   </ItemGroup>
 </Project>
