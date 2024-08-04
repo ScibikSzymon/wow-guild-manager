@@ -18,6 +18,7 @@ public class CreateGuildCommandHandler : IRequestHandler<CreateGuildCommand, Gui
 
     public async Task<GuildDto> Handle(CreateGuildCommand request, CancellationToken cancellationToken)
     {
+        return new GuildDto();
         var guild = request.Adapt<GuildEntity>();
         guild.CreateDate = DateTime.UtcNow;
 
