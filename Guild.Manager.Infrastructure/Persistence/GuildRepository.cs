@@ -10,6 +10,8 @@ internal class GuildRepository : IGuildRepository
         INSERT INTO Guild (Name, CreateDate) 
         VALUES (@Name, @CreateDate) 
         RETURNING GuildId";
+
+    private const string _getAllQuery = @"SELECT * FROM Guild";
     
     private readonly PostgresContext _postgresContext;
 
@@ -17,11 +19,12 @@ internal class GuildRepository : IGuildRepository
     {
         _postgresContext = postgresContext;
     }
+
     public async Task<GuildEntity> CreateGuildAsync(GuildEntity guild, CancellationToken cancellationToken)
     {
-        using var con = _postgresContext.CreateConnection();
+        using var connection = _postgresContext.CreateConnection();
         var command = new CommandDefinition(_createQuery, guild, cancellationToken: cancellationToken);
-        var id = await con.ExecuteScalarAsync<int>(command);
+        var id = await connection.ExecuteScalarAsync<int>(command);
 
         guild.GuildId = id;
         return guild;
@@ -31,4 +34,15 @@ internal class GuildRepository : IGuildRepository
     {
         throw new NotImplementedException();
     }
+
+    public async Task<IEnumerable<GuildEntity>> GetAll(CancellationToken cancellationToken) 
+    {
+        using var connection = _postgresContext.CreateConnection();
+        var commnad = new CommandDefinition(_getAllQuery, cancellationToken: cancellationToken);
+
+        var result = await connection.QueryAsync<GuildEntity>(commnad);
+
+        return result;
+    }
+
 }
