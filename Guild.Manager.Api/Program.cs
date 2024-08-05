@@ -35,3 +35,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+//Required by WebAppFactory Tests - do not remove
+public partial class Program { } 

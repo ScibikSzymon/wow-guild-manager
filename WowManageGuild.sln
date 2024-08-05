@@ -13,7 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Guild.Manager.Infrastructur
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{CAD37D80-D6A0-4140-BD17-3F7954D93C8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Guild.Manager.Domain", "..\Guild.Manager.Domain\Guild.Manager.Domain.csproj", "{3A544C66-9E5E-4C22-80E4-F93D1A428AAD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D517B803-05EB-446A-8A02-964875244BE6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Guild.Manager.Integration.Tests", "Guild.Manager.Integration.Tests\Guild.Manager.Integration.Tests.csproj", "{8D6CE857-9117-4F1E-93FA-ADC240967992}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Guild.Manager.Domain", "Guild.Manager.Domain\Guild.Manager.Domain.csproj", "{277AC89E-4F8B-40DC-B861-095A7432D71D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,13 +45,20 @@ Global
 		{CAD37D80-D6A0-4140-BD17-3F7954D93C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAD37D80-D6A0-4140-BD17-3F7954D93C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAD37D80-D6A0-4140-BD17-3F7954D93C8D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3A544C66-9E5E-4C22-80E4-F93D1A428AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3A544C66-9E5E-4C22-80E4-F93D1A428AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3A544C66-9E5E-4C22-80E4-F93D1A428AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3A544C66-9E5E-4C22-80E4-F93D1A428AAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D6CE857-9117-4F1E-93FA-ADC240967992}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D6CE857-9117-4F1E-93FA-ADC240967992}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D6CE857-9117-4F1E-93FA-ADC240967992}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D6CE857-9117-4F1E-93FA-ADC240967992}.Release|Any CPU.Build.0 = Release|Any CPU
+		{277AC89E-4F8B-40DC-B861-095A7432D71D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{277AC89E-4F8B-40DC-B861-095A7432D71D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{277AC89E-4F8B-40DC-B861-095A7432D71D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{277AC89E-4F8B-40DC-B861-095A7432D71D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8D6CE857-9117-4F1E-93FA-ADC240967992} = {D517B803-05EB-446A-8A02-964875244BE6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6022E437-B583-4034-879B-2427A8D2DC04}
