@@ -18,7 +18,7 @@ public class GuildsControllerTests : IClassFixture<GuildManagerWebAppFactory>
     public async void CreateNewGuild_ValidData_Returns201()
     {
         //Arrange
-        var client = _guildManagerWebAppFactory.CreateClient();
+        var client = _guildManagerWebAppFactory.HttpClient;
         var newGuild = JsonSerializer.Serialize(
             new
             {
