@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace Guild.Manager.Api.Requests;
 
-public class GuildRequest
+public record GuildRequest
 {
-    public string Name { get; set; }
+    public string Name { get; init; }
 }
 
 public class GuildRequestValidator : AbstractValidator<GuildRequest>

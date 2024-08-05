@@ -8,8 +8,6 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddScoped<IGuildService, GuildService>();
-
         serviceCollection.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
         return serviceCollection;

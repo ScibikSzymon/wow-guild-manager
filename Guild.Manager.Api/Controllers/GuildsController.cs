@@ -1,8 +1,9 @@
 ﻿using Guild.Manager.Api.Constants;
 using Guild.Manager.Api.Requests;
+using Guild.Manager.Api.Requests.Base;
 using Guild.Manager.Application.Common.Dtos;
-using Guild.Manager.Application.Modules.Guild;
 using Guild.Manager.Application.Modules.Guild.Commands;
+using Guild.Manager.Application.Modules.Guild.Queries;
 using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -19,9 +20,11 @@ public class GuildsController : BaseApiController
     }
 
     [HttpGet(Routes.Guilds.GetAll)]
-    public async Task<ActionResult<IEnumerable<GuildDto>>> GetGuilds()
+    public async Task<ActionResult<IEnumerable<GuildDto>>> GetGuilds([FromQuery] BaseFilterRequest baseFilterRequest)
     {
-        return new GuildDto[2];
+        var result = await _mediator.Send(baseFilterRequest.Adapt<GetGuildsQuery>());
+
+        return Ok(result);
     }
 
     [HttpGet(Routes.Guilds.GetById)]
@@ -34,7 +37,6 @@ public class GuildsController : BaseApiController
     [HttpPost(Routes.Guilds.Create)]
     public async Task<ActionResult<GuildDto>> PostGuild([FromBody] GuildRequest guild, CancellationToken cancellationToken)
     {
-        //var result = await _guildService.CreateGuildAsync(guild.Adapt<GuildDto>(), cancellationToken);
         var result = await _mediator.Send(guild.Adapt<CreateGuildCommand>());
 
         return CreatedAtAction(nameof(GetGuild), new { guildId = result.GuildId }, guild);
