@@ -1,6 +1,8 @@
-﻿namespace Guild.Manager.Application.Common.Dtos;
+﻿using Guild.Manager.Application.Common.Responses;
 
-public record MemberDto
+namespace Guild.Manager.Application.Common.Dtos;
+
+public record MemberDto : IResponse
 {
     public int MemberId { get; set; }
     public int GuildId { get; set; }
