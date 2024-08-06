@@ -20,7 +20,7 @@ internal class GuildRepository : IGuildRepository
         _postgresContext = postgresContext;
     }
 
-    public async Task<GuildEntity> CreateGuildAsync(GuildEntity guild, CancellationToken cancellationToken)
+    public async Task<GuildEntity> InsertAsync(GuildEntity guild, CancellationToken cancellationToken)
     {
         using var connection = _postgresContext.CreateConnection();
         var command = new CommandDefinition(_createQuery, guild, cancellationToken: cancellationToken);
@@ -30,12 +30,7 @@ internal class GuildRepository : IGuildRepository
         return guild;
     }
 
-    public Task GetGuild(string guildname)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<IEnumerable<GuildEntity>> GetAll(CancellationToken cancellationToken) 
+    public async Task<IEnumerable<GuildEntity>> GetAllAsync(CancellationToken cancellationToken) 
     {
         using var connection = _postgresContext.CreateConnection();
         var commnad = new CommandDefinition(_getAllQuery, cancellationToken: cancellationToken);
@@ -45,4 +40,18 @@ internal class GuildRepository : IGuildRepository
         return result;
     }
 
+    public Task<GuildEntity> UpdateAsync(GuildEntity entity, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task DeleteAsync(GuildEntity entity, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<GuildEntity> GetByIdAsync(int id, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
+    }
 }

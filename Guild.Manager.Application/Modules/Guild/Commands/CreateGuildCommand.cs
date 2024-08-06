@@ -21,7 +21,7 @@ public class CreateGuildCommandHandler : IRequestHandler<CreateGuildCommand, Gui
         var guild = request.Adapt<GuildEntity>();
         guild.CreateDate = DateTime.UtcNow;
 
-        var result = await _guildRepository.CreateGuildAsync(guild, cancellationToken);
+        var result = await _guildRepository.InsertAsync(guild, cancellationToken);
 
         return result.Adapt<GuildDto>();
     }

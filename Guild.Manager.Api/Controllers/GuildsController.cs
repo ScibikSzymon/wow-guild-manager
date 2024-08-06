@@ -5,30 +5,22 @@ using Guild.Manager.Application.Common.Dtos;
 using Guild.Manager.Application.Modules.Guild.Commands;
 using Guild.Manager.Application.Modules.Guild.Queries;
 using Mapster;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Guild.Manager.Api.Controllers;
 
 public class GuildsController : BaseApiController
 {
-    private readonly IMediator _mediator;
-
-    public GuildsController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     [HttpGet(Routes.Guilds.GetAll)]
-    public async Task<ActionResult<IEnumerable<GuildDto>>> GetGuilds([FromQuery] BaseFilterRequest baseFilterRequest)
+    public async Task<ActionResult<IEnumerable<GuildDto>>> GetAll([FromQuery] BaseFilterRequest baseFilterRequest, CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(baseFilterRequest.Adapt<GetGuildsQuery>());
+        var result = await Mediator.Send(baseFilterRequest.Adapt<GetGuildsQuery>(), cancellationToken);
 
         return Ok(result);
     }
 
     [HttpGet(Routes.Guilds.GetById)]
-    public async Task<ActionResult<GuildDto>> GetGuild(int id)
+    public async Task<ActionResult<GuildDto>> GetById(int id)
     {
 
         return new GuildDto();
@@ -37,20 +29,20 @@ public class GuildsController : BaseApiController
     [HttpPost(Routes.Guilds.Create)]
     public async Task<ActionResult<GuildDto>> PostGuild([FromBody] GuildRequest guild, CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(guild.Adapt<CreateGuildCommand>());
+        var result = await Mediator.Send(guild.Adapt<CreateGuildCommand>(), cancellationToken);
 
-        return CreatedAtAction(nameof(GetGuild), new { guildId = result.GuildId }, guild);
+        return CreatedAtAction(nameof(GetById), new { guildId = result.GuildId }, result);
     }
 
     [HttpPut(Routes.Guilds.Update)]
-    public async Task<IActionResult> PutGuild(int id, GuildRequest guild)
+    public async Task<IActionResult> Update(int id, GuildRequest guild)
     {
 
         return NoContent();
     }
 
     [HttpDelete(Routes.Guilds.Delete)]
-    public async Task<IActionResult> DeleteGuild(int id)
+    public async Task<IActionResult> Delete(int id)
     {
         return NoContent();
     }

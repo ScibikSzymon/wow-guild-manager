@@ -13,7 +13,7 @@ services:
       POSTGRES_DB: wow-manage-guild
       POSTGRES_HOST_AUTH_METHOD: trust
   pgadmin:
-    ports: 
+    ports:
       - "8888:80"
     volumes:
       - pgadmin:/var/lib/pgadmin 

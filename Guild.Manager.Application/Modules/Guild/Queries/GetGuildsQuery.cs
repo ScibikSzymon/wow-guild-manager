@@ -18,7 +18,7 @@ public class GetGuildsQueryHandler : IRequestHandler<GetGuildsQuery, IEnumerable
 
     public async Task<IEnumerable<GuildDto>> Handle(GetGuildsQuery request, CancellationToken cancellationToken)
     {
-        var result = await _guildRepository.GetAll(cancellationToken);     
+        var result = await _guildRepository.GetAllAsync(cancellationToken);     
 
         return result.Adapt<IEnumerable<GuildDto>>();
     }

@@ -1,4 +1,5 @@
 ﻿using Guild.Manager.Application.Modules.Guild;
+using Guild.Manager.Application.Modules.Members;
 using Guild.Manager.Infrastructure.Options;
 using Guild.Manager.Infrastructure.Persistence;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,7 @@ public static class DependencyInjection
         serviceCollection.AddScoped<PostgresContext>();
 
         serviceCollection.TryAddScoped<IGuildRepository, GuildRepository>();
+        serviceCollection.TryAddScoped<IMemberRepository, MemberRepository>();
 
         serviceCollection.AddOptions<ConnectionStrings>().BindConfiguration(ConnectionStrings.Section);
 
