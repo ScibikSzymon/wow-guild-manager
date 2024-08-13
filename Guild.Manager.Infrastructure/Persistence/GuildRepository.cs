@@ -12,6 +12,8 @@ internal class GuildRepository : IGuildRepository
         RETURNING GuildId";
 
     private const string _getAllQuery = @"SELECT * FROM Guild";
+
+    private const string _getById = @"SELECT * FROM Guild WHERE GuildId = @GuildID";
     
     private readonly PostgresContext _postgresContext;
 
@@ -50,8 +52,17 @@ internal class GuildRepository : IGuildRepository
         throw new NotImplementedException();
     }
 
-    public Task<GuildEntity> GetByIdAsync(int id, CancellationToken cancellationToken)
+    public async Task<GuildEntity> GetByIdAsync(int id, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        using var connection = _postgresContext.CreateConnection();
+
+        var parameters = new
+        {
+            GuildId = id,
+        };
+        var command = new CommandDefinition(_getById, parameters, cancellationToken: cancellationToken);
+        var result = await connection.QueryFirstOrDefaultAsync<GuildEntity>(command);
+
+        return result;
     }
 }

@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using Guild.Manager.Application.Common.Dtos;
 using Guild.Manager.Application.Common.Responses;
+using Guild.Manager.Application.Modules.Guild;
 using Guild.Manager.Domain.Entities;
 using Mapster;
 using MediatR;
@@ -31,8 +33,11 @@ public class CreateMemberCommandHandler : IRequestHandler<CreateMemberCommand, R
 
 class CreateMemberCommandValidator : AbstractValidator<CreateMemberCommand>
 {
-    public CreateMemberCommandValidator()
+    public CreateMemberCommandValidator(IGuildRepository guildRepository)
     {
-        RuleFor(x => x.Name).NotEmpty();
+        RuleFor(x => x.GuildId)
+            .MustAsync(async (id, ct) => await guildRepository.GetByIdAsync(id, ct) is not null)
+            .WithMessage("GuildId do not exist");
     }
+
 }

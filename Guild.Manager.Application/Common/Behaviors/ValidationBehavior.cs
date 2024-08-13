@@ -37,7 +37,7 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
         {
             var errorResponse = new ValidationErrorResponse() { ValidationError = validationErrors };
 
-            var method = errorResponse.GetType().GetMethod("FromT1");
+            var method = typeof(TResponse).GetMethod("FromT1");
             var @delegate = method.CreateDelegate(typeof(Func<IErrorResponse, TResponse>));
 
             return ((Func<IErrorResponse, TResponse>)@delegate)(errorResponse);
