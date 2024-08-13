@@ -7,6 +7,7 @@ using Guild.Manager.Application.Modules.Guild.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Guild.Manager.Application.Modules.Members.Commands;
 using Mapster;
+using Guild.Manager.Api.Extensions;
 
 namespace Guild.Manager.Api.Controllers
 {
@@ -32,7 +33,7 @@ namespace Guild.Manager.Api.Controllers
         {
             var result = await Mediator.Send(memmberRequest.Adapt<CreateMemberCommand>(), cancellationToken);
 
-            return CreatedAtAction(nameof(GetById), new { memberId = result.MemberId }, result);
+            return result.ToApiReposne(HttpContext);
         }
 
         [HttpPut(Routes.Members.Update)]
