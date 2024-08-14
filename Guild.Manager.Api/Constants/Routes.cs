@@ -27,5 +27,17 @@ public static class Routes
         public const string Delete = BaseById;
         public const string Update = BaseById;
     }
+
+    public static class Character
+    {
+        public const string Base = Routes.Base + "/character";
+        public const string BaseById = Routes.Base + Base + "{characterId}";
+
+        public const string GetAll = Base;
+        public const string GetById = BaseById;
+        public const string Create = Base;
+        public const string Delete = BaseById;
+        public const string Update = BaseById;
+    }
 }
 
