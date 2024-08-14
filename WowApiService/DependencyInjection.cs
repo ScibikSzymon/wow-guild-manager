@@ -9,9 +9,12 @@ public static class DependencyInjection
     {
         services.AddHttpClient<IWowApiAuthenticationService, WowApiAuthenticationService>(httpClient =>
         {
-            httpClient.BaseAddress = new Uri("https://oauth.battle.net/");
+            httpClient.BaseAddress = new Uri("https://oauth.battle.net");
         });
-        services.AddSingleton<IWowApiService, WowApiService>();
+        services.AddHttpClient<IWowApiService, WowApiService>(httpClient =>
+        {
+            httpClient.BaseAddress = new Uri("https://eu.api.blizzard.com");
+        });
         services.AddOptions<WowApiOptions>().BindConfiguration(WowApiOptions.Section);
 
         return services;

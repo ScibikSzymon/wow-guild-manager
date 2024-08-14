@@ -1,8 +1,10 @@
 ﻿
+using WowApiService.Dtos;
+
 namespace WowApiService
 {
-    public interface IWowApiAuthenticationService
+    internal interface IWowApiAuthenticationService
     {
-        Task<string> GetAccessToken();
+        Task<OAuthTokenDto> GetAccessToken();
     }
 }

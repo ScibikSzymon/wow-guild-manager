@@ -9,15 +9,15 @@ public record CreateCharacterCommand(string MemeberId, string characterName) : I
 
 public class CreateCharacterCommandHandler : IRequestHandler<CreateCharacterCommand, Response<CharacterDto>>
 {
-    private readonly IWowApiAuthenticationService _wowApiAuthenticationService;
+    private readonly IWowApiService _wowApiService;
 
-    public CreateCharacterCommandHandler(IWowApiAuthenticationService wowApiAuthenticationService)
+    public CreateCharacterCommandHandler(IWowApiService wowApiService)
     {
-        _wowApiAuthenticationService = wowApiAuthenticationService;
+        _wowApiService = wowApiService;
     }
     public Task<Response<CharacterDto>> Handle(CreateCharacterCommand request, CancellationToken cancellationToken)
     {
-        _wowApiAuthenticationService.GetAccessToken();
+        _wowApiService.GetCharacter("wd");
         throw new NotImplementedException();
     }
 }
