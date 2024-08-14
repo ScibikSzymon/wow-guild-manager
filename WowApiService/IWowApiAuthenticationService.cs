@@ -1,7 +1,7 @@
 ﻿
 namespace WowApiService
 {
-    internal interface IWowApiAuthorizationService
+    public interface IWowApiAuthenticationService
     {
         Task<string> GetAccessToken();
     }

@@ -4,20 +4,23 @@ using Guild.Manager.Infrastructure.Options;
 using Guild.Manager.Infrastructure.Persistence;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using WowApiService;
 
 namespace Guild.Manager.Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection serviceCollection)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
-        serviceCollection.AddScoped<PostgresContext>();
+        services.AddScoped<PostgresContext>();
 
-        serviceCollection.TryAddScoped<IGuildRepository, GuildRepository>();
-        serviceCollection.TryAddScoped<IMemberRepository, MemberRepository>();
+        services.TryAddScoped<IGuildRepository, GuildRepository>();
+        services.TryAddScoped<IMemberRepository, MemberRepository>();
 
-        serviceCollection.AddOptions<ConnectionStrings>().BindConfiguration(ConnectionStrings.Section);
+        services.AddOptions<ConnectionStrings>().BindConfiguration(ConnectionStrings.Section);
 
-        return serviceCollection;
+        services.AddWowApiService();
+
+        return services;
     }
 }

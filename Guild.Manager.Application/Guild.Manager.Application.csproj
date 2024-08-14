@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Guild.Manager.Domain\Guild.Manager.Domain.csproj" />
+    <ProjectReference Include="..\WowApiService\WowApiService.csproj" />
   </ItemGroup>
 
 </Project>

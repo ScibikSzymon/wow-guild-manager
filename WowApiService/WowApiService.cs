@@ -8,8 +8,5 @@ internal class WowApiService : IWowApiService
         throw new NotImplementedException();
     }
 
-    private Task GetToken(string clientId, string clientSecret) 
-    {
-    
-    }
+
 }

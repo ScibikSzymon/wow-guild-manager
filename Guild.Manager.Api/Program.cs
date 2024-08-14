@@ -15,8 +15,8 @@ builder.Services
     .AddFluentValidationAutoValidation()
     .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-builder.Services.AddInfrastructure();
-builder.Services.AddApplication();
+builder.Services.AddInfrastructure()
+    .AddApplication();
 
 
 var app = builder.Build();
