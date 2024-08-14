@@ -1,5 +1,8 @@
 ﻿
+using System.Net;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using WowApiService.Dtos;
 
 namespace WowApiService;
 
@@ -14,16 +17,17 @@ internal class WowApiService : IWowApiService
         _wowApiAuthenticationService = wowApiAuthenticationService;
     }
 
-    public async Task GetCharacter(string characterName)
+    public async Task<WowCharacterDto> GetCharacter(string characterName)
     {
         var accessToken = await _wowApiAuthenticationService.GetAccessToken();
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken.AccessToken);
+        var response = await _httpClient.GetAsync($"/profile/wow/character/burning-legion/{characterName}?namespace=profile-eu&locale=en_US");
 
-        var response = await _httpClient.GetAsync("data/wow/token/?namespace=dynamic-eu");
-
-        response.EnsureSuccessStatusCode();
-
-        var responseContent = await response.Content.ReadAsStringAsync();
+        return response.StatusCode switch
+        {
+            HttpStatusCode.OK => await response.Content.ReadFromJsonAsync<WowCharacterDto>(),
+            _ => throw new Exception("Failed to read character from wow api")
+        };
     }
 
 

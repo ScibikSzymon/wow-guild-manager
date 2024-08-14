@@ -1,6 +1,8 @@
-﻿namespace WowApiService;
+﻿using WowApiService.Dtos;
+
+namespace WowApiService;
 
 public interface IWowApiService
 {
-    Task GetCharacter(string characterName);
+    Task<WowCharacterDto> GetCharacter(string characterName);
 }
