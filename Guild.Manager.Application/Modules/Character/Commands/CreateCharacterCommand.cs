@@ -5,7 +5,7 @@ using WowApiService;
 
 namespace Guild.Manager.Application.Modules.Character.Commands;
 
-public record CreateCharacterCommand(string MemeberId, string CharacterName) : IRequest<Response<CharacterDto>>;
+public record CreateCharacterCommand(string MemeberId, string CharacterName, string Realm) : IRequest<Response<CharacterDto>>;
 
 public class CreateCharacterCommandHandler : IRequestHandler<CreateCharacterCommand, Response<CharacterDto>>
 {
@@ -17,7 +17,7 @@ public class CreateCharacterCommandHandler : IRequestHandler<CreateCharacterComm
     }
     public async Task<Response<CharacterDto>> Handle(CreateCharacterCommand request, CancellationToken cancellationToken)
     {
-        var result = await _wowApiService.GetCharacter(request.CharacterName);
+        var result = await _wowApiService.GetCharacterAsync(request.CharacterName, request.Realm);
 
         return new CharacterDto
         {

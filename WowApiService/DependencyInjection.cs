@@ -7,6 +7,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddWowApiService(this IServiceCollection services)
     {
+        services.AddMemoryCache();
         services.AddHttpClient<IWowApiAuthenticationService, WowApiAuthenticationService>(httpClient =>
         {
             httpClient.BaseAddress = new Uri("https://oauth.battle.net");

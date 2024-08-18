@@ -17,11 +17,11 @@ internal class WowApiService : IWowApiService
         _wowApiAuthenticationService = wowApiAuthenticationService;
     }
 
-    public async Task<WowCharacterDto> GetCharacter(string characterName)
+    public async Task<WowCharacterDto> GetCharacterAsync(string characterName, string realm, CancellationToken cancellationToken)
     {
-        var accessToken = await _wowApiAuthenticationService.GetAccessToken();
-        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken.AccessToken);
-        var response = await _httpClient.GetAsync($"/profile/wow/character/burning-legion/{characterName}?namespace=profile-eu&locale=en_US");
+        var accessToken = await _wowApiAuthenticationService.GetAccessTokenAsync();
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+        var response = await _httpClient.GetAsync($"/profile/wow/character/{realm}/{characterName}?namespace=profile-eu&locale=en_US", cancellationToken);
 
         return response.StatusCode switch
         {
@@ -30,5 +30,17 @@ internal class WowApiService : IWowApiService
         };
     }
 
+    public async Task<WowGuildDto> GetGuildAsync(string guildName, string realm, CancellationToken cancellationToken)//burning-legion
+    {
+        var accessToken = await _wowApiAuthenticationService.GetAccessTokenAsync();
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
+        var response = await _httpClient.GetAsync($"/profile/wow/guild/{realm}/{guildName}?namespace=profile-eu&locale=en_US", cancellationToken);
+
+        return response.StatusCode switch
+        {
+            HttpStatusCode.OK => await response.Content.ReadFromJsonAsync<WowGuildDto>(),
+            _ => throw new Exception("Failed to read character from wow api")
+        };
+    }
 }

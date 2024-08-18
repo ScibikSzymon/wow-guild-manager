@@ -37,7 +37,7 @@ namespace Guild.Manager.Api.Controllers
         }
 
         [HttpPut(Routes.Members.Update)]
-        public async Task<IActionResult> Update(int id, GuildRequest guild)
+        public async Task<IActionResult> Update(int id, CreateGuildRequest guild)
         {
 
             return NoContent();

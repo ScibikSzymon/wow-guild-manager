@@ -27,7 +27,7 @@ public class GuildsController : BaseApiController
     }
 
     [HttpPost(Routes.Guilds.Create)]
-    public async Task<ActionResult<GuildDto>> PostGuild([FromBody] GuildRequest guild, CancellationToken cancellationToken)
+    public async Task<ActionResult<GuildDto>> PostGuild([FromBody] CreateGuildRequest guild, CancellationToken cancellationToken)
     {
         var result = await Mediator.Send(guild.Adapt<CreateGuildCommand>(), cancellationToken);
 
@@ -35,7 +35,7 @@ public class GuildsController : BaseApiController
     }
 
     [HttpPut(Routes.Guilds.Update)]
-    public async Task<IActionResult> Update(int id, GuildRequest guild)
+    public async Task<IActionResult> Update(int id, CreateGuildRequest guild)
     {
 
         return NoContent();

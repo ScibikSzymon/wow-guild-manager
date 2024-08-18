@@ -5,6 +5,6 @@ namespace WowApiService
 {
     internal interface IWowApiAuthenticationService
     {
-        Task<OAuthTokenDto> GetAccessToken();
+        Task<string> GetAccessTokenAsync();
     }
 }
